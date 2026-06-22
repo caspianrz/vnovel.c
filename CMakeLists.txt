@@ -11,7 +11,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 option(VNOVEL_C_BUILD_EXAMPLE "Build examples." ON)
 
-set(vnovel_sources "src/engine.c" "src/background.c")
+file(GLOB vnovel_sources "src/*.c")
 
 add_library(vnovel.c ${vnovel_sources})
 add_library(vnovel::lib ALIAS vnovel.c)
@@ -47,6 +47,7 @@ if(VNOVEL_C_BUILD_EXAMPLE)
     set(examples
         "window:examples/window.c"
 		"background:examples/background.c"
+		"sample_scene:examples/sample_scene.c"
     )
 
 	set(example_output_dir "${CMAKE_BINARY_DIR}/examples")

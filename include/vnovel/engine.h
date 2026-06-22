@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include <vnovel/scene.h>
+
 #include <SDL3/SDL.h>
 
 #include <stdbool.h>
@@ -52,6 +54,9 @@ uint32_t vn_engine_height(const vn_engine *engine);
 
 SDL_Window *vn_engine_window(vn_engine *engine);
 SDL_Renderer *vn_engine_renderer(vn_engine *engine);
+
+/* Scene */
+void vn_engine_render_scene(vn_engine *engine, const vn_scene *scene);
 
 #ifdef __cplusplus
 }

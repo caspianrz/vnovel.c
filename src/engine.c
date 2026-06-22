@@ -238,3 +238,18 @@ SDL_Window *vn_engine_window(vn_engine *engine) {
 SDL_Renderer *vn_engine_renderer(vn_engine *engine) {
   return engine ? engine->renderer : NULL;
 }
+
+// Scene
+
+void vn_engine_render_scene(vn_engine *engine, const vn_scene *scene) {
+  if (!engine || !scene) {
+    return;
+  }
+
+  // SDL_SetRenderDrawColor(engine->renderer, 0, 0, 0, 255);
+  // SDL_RenderClear(engine->renderer);
+
+  vn_scene_render(scene, engine->renderer);
+
+  // SDL_RenderPresent(engine->renderer);
+}

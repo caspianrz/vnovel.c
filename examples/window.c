@@ -13,7 +13,6 @@ int main(void) {
     vn_engine_poll(engine);
     vn_engine_update(engine);
     vn_engine_begin_frame(engine);
-
 	vn_engine_end_frame(engine);
   }
 
