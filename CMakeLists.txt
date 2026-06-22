@@ -11,7 +11,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 option(VNOVEL_C_BUILD_EXAMPLE "Build examples." ON)
 
-set(vnovel_sources "src/engine.c")
+set(vnovel_sources "src/engine.c" "src/background.c")
 
 add_library(vnovel.c ${vnovel_sources})
 add_library(vnovel::lib ALIAS vnovel.c)
@@ -22,20 +22,34 @@ target_include_directories(
 	${PROJECT_SOURCE_DIR}/include
 )
 
-find_package(SDL3 REQUIRED)
+find_package(SDL3 CONFIG REQUIRED)
+find_package(SDL3_image CONFIG REQUIRED)
 
 target_link_libraries(
 	vnovel.c
 	PUBLIC
 	SDL3::SDL3
+	SDL3_image::SDL3_image
+)
+
+# Asset copying for example project
+set(ASSET_SOURCE_DIR ${CMAKE_SOURCE_DIR}/examples/assets)
+set(ASSET_OUTPUT_DIR ${CMAKE_BINARY_DIR}/examples/assets)
+
+add_custom_target(copy_assets ALL
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+          ${ASSET_SOURCE_DIR}
+          ${ASSET_OUTPUT_DIR}
+  COMMENT "Copying example assets to build directory"
 )
 
 if(VNOVEL_C_BUILD_EXAMPLE)
     set(examples
         "window:examples/window.c"
+		"background:examples/background.c"
     )
 
-	set(example_output_dir "${CMAKE_BINARY_DIR}/example")
+	set(example_output_dir "${CMAKE_BINARY_DIR}/examples")
 
     foreach(example ${examples})
         string(REPLACE ":" ";" pair ${example})

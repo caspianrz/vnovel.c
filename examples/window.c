@@ -12,7 +12,9 @@ int main(void) {
   while (vn_engine_running(engine)) {
     vn_engine_poll(engine);
     vn_engine_update(engine);
-    vn_engine_render(engine);
+    vn_engine_begin_frame(engine);
+
+	vn_engine_end_frame(engine);
   }
 
   vn_engine_destroy(engine);

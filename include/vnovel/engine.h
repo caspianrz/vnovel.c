@@ -27,7 +27,6 @@ typedef enum vn_result {
 /* Lifecycle */
 
 vn_engine *vn_engine_create(const vn_config *config);
-
 void vn_engine_destroy(vn_engine *engine);
 
 /* Main Loop */
@@ -38,19 +37,21 @@ void vn_engine_poll(vn_engine *engine);
 
 void vn_engine_update(vn_engine *engine);
 
-void vn_engine_render(vn_engine *engine);
+void vn_engine_begin_frame(vn_engine *e);
+void vn_engine_end_frame(vn_engine *e);
 
 /* Timing */
 
 float vn_engine_delta_time(const vn_engine *engine);
-
 double vn_engine_time(const vn_engine *engine);
 
 /* Window */
 
 uint32_t vn_engine_width(const vn_engine *engine);
-
 uint32_t vn_engine_height(const vn_engine *engine);
+
+SDL_Window *vn_engine_window(vn_engine *engine);
+SDL_Renderer *vn_engine_renderer(vn_engine *engine);
 
 #ifdef __cplusplus
 }
